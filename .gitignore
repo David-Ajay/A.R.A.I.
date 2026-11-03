@@ -166,6 +166,9 @@ data/processed/*
 !data/processed/.gitkeep
 logs/
 *.log
+output/itineraries/*.pdf
+output/itineraries/*.ics
+output/result_*.json
 
 # AI/ML models
 *.pkl

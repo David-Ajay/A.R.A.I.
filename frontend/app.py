@@ -26,7 +26,7 @@ from frontend.components.feedback_form import show_feedback_form, show_quick_fee
 # Page configuration
 st.set_page_config(
     page_title="AI Travel Planner",
-    page_icon="✈️",
+    page_icon="✈︎",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -56,18 +56,75 @@ def main():
     """Main application function."""
     
     initialize_session_state()
-    
+
+    # Decorative reels stay behind the Streamlit interface and never capture input.
+    reel_mode = "results-mode" if st.session_state.itinerary else ""
+    st.markdown(f"""
+        <div id="travel-reel-background" class="{reel_mode}" aria-hidden="true">
+            <div class="travel-reel-column reel-up reel-fast">
+                <div class="travel-reel-track">
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=560&h=760&fit=crop" alt="">
+                </div>
+            </div>
+            <div class="travel-reel-column reel-down reel-slow">
+                <div class="travel-reel-track">
+                    <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=560&h=760&fit=crop" alt="">
+                </div>
+            </div>
+            <div class="travel-reel-column reel-up reel-medium">
+                <div class="travel-reel-track">
+                    <img src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=560&h=760&fit=crop" alt="">
+                </div>
+            </div>
+            <div class="travel-reel-column reel-down reel-medium">
+                <div class="travel-reel-track">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?w=560&h=760&fit=crop" alt="">
+                </div>
+            </div>
+            <div class="travel-reel-column reel-up reel-slow">
+                <div class="travel-reel-track">
+                    <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=560&h=760&fit=crop" alt="">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=560&h=760&fit=crop" alt="">
+                </div>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
     # Header
     st.markdown("""
         <div class="header">
-            <h1>✈️ AI Travel Planner</h1>
+            <h1>✈︎ AI Travel Planner</h1>
             <p>Intelligent, adaptive travel planning powered by multi-agent AI</p>
         </div>
     """, unsafe_allow_html=True)
     
     # Sidebar for input
     with st.sidebar:
-        st.markdown("## 🧭 Plan Your Trip")
+        st.markdown("## ⌖ Plan Your Trip")
         
         with st.form("travel_form"):
             # Destination
@@ -84,7 +141,7 @@ def main():
             )
             
             # Dates
-            st.markdown("### 📅 Travel Dates")
+            st.markdown("### ▦ Travel Dates")
             col1, col2 = st.columns(2)
             
             min_date = datetime.now() + timedelta(days=1)
@@ -107,7 +164,7 @@ def main():
                 )
             
             # Budget
-            st.markdown("### 💰 Budget")
+            st.markdown("### $ Budget")
             budget = st.slider(
                 "Total Budget (USD)",
                 min_value=500,
@@ -119,9 +176,9 @@ def main():
             
             # Show budget recommendation
             if budget < 2000:
-                st.info("💡 Tip: International flights typically start at $1500-2000. Consider increasing budget for more options.")
+                st.info("i Tip: International flights typically start at $1500-2000. Consider increasing budget for more options.")
             elif budget < 3000:
-                st.info("💡 Tip: For comfort or luxury travel, consider budgets of $3000+")
+                st.info("i Tip: For comfort or luxury travel, consider budgets of $3000+")
             
             # Group size
             group_size = st.number_input(
@@ -133,7 +190,7 @@ def main():
             )
             
             # Preferences
-            st.markdown("### 🎯 Preferences")
+            st.markdown("### ◎ Preferences")
             
             preferences = st.multiselect(
                 "Trip Style",
@@ -169,7 +226,7 @@ def main():
             )
             
             # Advanced options
-            with st.expander("⚙️ Advanced Options"):
+            with st.expander("⚙︎ Advanced Options"):
                 flexible_dates = st.checkbox("Flexible dates", value=True)
                 include_activities = st.checkbox("Include activities", value=True)
                 max_flight_duration = st.number_input(
@@ -181,7 +238,7 @@ def main():
             
             # Submit button
             submitted = st.form_submit_button(
-                "🚀 Generate Itinerary",
+                "↗ Generate Itinerary",
                 use_container_width=True,
                 type="primary"
             )
@@ -243,7 +300,7 @@ def show_welcome_view():
     
     st.markdown("""
         <div class="welcome-section">
-            <h2>🌍 Welcome to AI Travel Planner</h2>
+            <h2>◉ Welcome to AI Travel Planner</h2>
             <p>Plan your perfect trip with AI-powered recommendations</p>
         </div>
     """, unsafe_allow_html=True)
@@ -252,7 +309,7 @@ def show_welcome_view():
     
     with col1:
         st.markdown("""
-            ### 🤖 AI-Powered
+            ### ◇ AI-Powered
             Multi-agent system with intelligent orchestration
             - Llama reasoning engine
             - GNN personalization
@@ -261,7 +318,7 @@ def show_welcome_view():
     
     with col2:
         st.markdown("""
-            ### ⚡ Real-Time Data
+            ### ϟ Real-Time Data
             Live integration with travel APIs
             - Flight comparisons
             - Hotel availability
@@ -270,7 +327,7 @@ def show_welcome_view():
     
     with col3:
         st.markdown("""
-            ### 🎯 Personalized
+            ### ◎ Personalized
             Tailored to your preferences
             - Budget optimization
             - Activity recommendations
@@ -279,37 +336,37 @@ def show_welcome_view():
     
     st.markdown("---")
     
-    st.markdown("## 🚀 How It Works")
+    st.markdown("## ↗ How It Works")
     
     steps_col1, steps_col2, steps_col3, steps_col4 = st.columns(4)
     
     with steps_col1:
-        st.info("**1. Input** 📝\n\nEnter your destination, dates, budget, and preferences")
+        st.info("**1. Input** ✎\n\nEnter your destination, dates, budget, and preferences")
     
     with steps_col2:
-        st.info("**2. Process** ⚙️\n\nAI agents analyze and optimize your travel plan")
+        st.info("**2. Process** ⚙︎\n\nAI agents analyze and optimize your travel plan")
     
     with steps_col3:
-        st.info("**3. Review** 👀\n\nView personalized itinerary with all details")
+        st.info("**3. Review** ◉\n\nView personalized itinerary with all details")
     
     with steps_col4:
-        st.info("**4. Export** 📥\n\nDownload PDF and add to calendar")
+        st.info("**4. Export** ↓\n\nDownload PDF and add to calendar")
     
     st.markdown("---")
     
-    st.markdown("### 👈 Get started by filling out the form in the sidebar!")
+    st.markdown("### → Get started by filling out the form in the sidebar!")
 
 
 def show_processing_view():
     """Display processing view with progress updates."""
     
-    st.markdown("## 🔄 Processing Your Request")
+    st.markdown("## ↻ Processing Your Request")
     
     # Progress container
     progress_container = st.container()
     
     with progress_container:
-        st.info("✨ Our AI agents are working on your perfect itinerary...")
+        st.info("✦ Our AI agents are working on your perfect itinerary...")
         
         # Show processing stages
         stages = [
@@ -322,7 +379,7 @@ def show_processing_view():
         ]
         
         for stage in stages:
-            st.markdown(f"⏳ {stage}...")
+            st.markdown(f"◷ {stage}...")
 
 
 def show_results_view():
@@ -354,7 +411,7 @@ def show_results_view():
     st.markdown("---")
     
     # Feedback
-    with st.expander("💬 Share Your Feedback", expanded=False):
+    with st.expander("“ Share Your Feedback", expanded=False):
         show_feedback_form(itinerary['itinerary_id'])
     
     # Quick feedback
@@ -362,7 +419,7 @@ def show_results_view():
     
     # New search button
     st.markdown("---")
-    if st.button("🔄 Plan Another Trip", use_container_width=True, type="primary"):
+    if st.button("↻ Plan Another Trip", use_container_width=True, type="primary"):
         st.session_state.itinerary = None
         st.session_state.result = None
         st.rerun()
@@ -378,7 +435,7 @@ def process_travel_request(request):
         progress_placeholder = st.empty()
         
         with progress_placeholder.container():
-            st.markdown("## 🔄 Processing Your Request")
+            st.markdown("## ↻ Processing Your Request")
             progress_bar = st.progress(0)
             status_text = st.empty()
             
@@ -404,19 +461,19 @@ def process_travel_request(request):
                 
                 # Clear progress and show success
                 progress_placeholder.empty()
-                st.success("✅ Your travel itinerary is ready!")
+                st.success("✓ Your travel itinerary is ready!")
                 st.balloons()
                 st.rerun()
             else:
                 st.session_state.processing = False
                 progress_placeholder.empty()
-                st.error(f"❌ Error: {', '.join(result['errors'])}")
+                st.error(f"× Error: {', '.join(result['errors'])}")
                 if result.get('warnings'):
-                    st.warning(f"⚠️ Warnings: {', '.join(result['warnings'])}")
+                    st.warning(f"! Warnings: {', '.join(result['warnings'])}")
     
     except Exception as e:
         st.session_state.processing = False
-        st.error(f"❌ An error occurred: {str(e)}")
+        st.error(f"× An error occurred: {str(e)}")
 
 
 if __name__ == "__main__":
