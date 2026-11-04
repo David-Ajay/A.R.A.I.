@@ -1,4 +1,4 @@
-# 🌍 Smart AI Route and Itinerary Assistant (A.R.A.I)
+# 🌍 Smart AI Route and Itinerary Assistant (A.R.A.I.)
 
 An intelligent, adaptive travel planning system powered by multi-agent AI orchestration, real-time data integration, and personalized recommendations.
 
