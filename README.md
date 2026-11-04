@@ -20,6 +20,9 @@ This system transforms fragmented travel planning into an intelligent, dynamic e
 - **PDF Export** for downloadable itineraries
 - **Calendar Export** (.ics format)
 
+<img width="1684" height="2208" alt="image" src="https://github.com/user-attachments/assets/d607f1b1-c917-477b-b379-e76234c8dfa5" />
+
+
 ## 🏗️ Architecture
 
 ```
